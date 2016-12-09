@@ -18,7 +18,7 @@ Feel free to use as a template for your application.
 
 or 
 
-Open as and Eclipse project, and run the JUnit tests.
+Open as an Eclipse project, and run the JUnit tests.
 
 == Windows?
 
