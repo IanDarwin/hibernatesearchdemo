@@ -1,0 +1,5 @@
+= HibernateSearchDemo
+
+This is an example of using Hibernate Search, formerly known as Lucene.
+
+See http://hibernate.org/search/documentation/getting-started/ for some pointers.
