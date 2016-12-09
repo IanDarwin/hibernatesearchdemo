@@ -13,6 +13,8 @@ import javax.persistence.OrderColumn;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
+import org.apache.lucene.analysis.standard.StandardAnalyzer;
+import org.hibernate.search.annotations.Analyzer;
 import org.hibernate.search.annotations.DocumentId;
 import org.hibernate.search.annotations.Field;
 import org.hibernate.search.annotations.Indexed;
@@ -24,6 +26,7 @@ import org.hibernate.search.annotations.IndexedEmbedded;
 @Entity
 @Indexed
 @Table(name="MusicRecordings")
+@Analyzer(impl=StandardAnalyzer.class)
 public class MusicRecording {
 
 	@Id @GeneratedValue(strategy=GenerationType.AUTO) @DocumentId
