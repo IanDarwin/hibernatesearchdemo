@@ -13,12 +13,17 @@ import javax.persistence.OrderColumn;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
-import org.apache.lucene.analysis.standard.StandardAnalyzer;
+import org.apache.lucene.analysis.core.LowerCaseFilterFactory;
+import org.apache.lucene.analysis.miscellaneous.ASCIIFoldingFilterFactory;
+import org.apache.lucene.analysis.standard.StandardTokenizerFactory;
 import org.hibernate.search.annotations.Analyzer;
+import org.hibernate.search.annotations.AnalyzerDef;
 import org.hibernate.search.annotations.DocumentId;
 import org.hibernate.search.annotations.Field;
 import org.hibernate.search.annotations.Indexed;
 import org.hibernate.search.annotations.IndexedEmbedded;
+import org.hibernate.search.annotations.TokenFilterDef;
+import org.hibernate.search.annotations.TokenizerDef;
 
 /**
  *  This class represents a music recording.
@@ -26,7 +31,13 @@ import org.hibernate.search.annotations.IndexedEmbedded;
 @Entity
 @Indexed
 @Table(name="MusicRecordings")
-@Analyzer(impl=StandardAnalyzer.class)
+@AnalyzerDef(name="titleAnalyzer",
+tokenizer = @TokenizerDef(factory = StandardTokenizerFactory.class),
+filters = {
+  @TokenFilterDef(factory = ASCIIFoldingFilterFactory.class),
+  @TokenFilterDef(factory = LowerCaseFilterFactory.class),
+})
+@Analyzer(definition = "titleAnalyzer")
 public class MusicRecording {
 
 	@Id @GeneratedValue(strategy=GenerationType.AUTO) @DocumentId

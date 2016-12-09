@@ -42,32 +42,38 @@ public class SearchTest {
 	@Test
 	public void test() {
 		
+		// Create a dummy Music Recording
+		MusicRecording mr0 = new MusicRecording();
+		mr0.setArtist("Me");
+		mr0.setTitle("All About Me");
+		
 		// Create a MR that SHOULD be found
 		Track t1 = new Track("Jivin' on a SUNny day");
 		Track t2 = new Track("Consulting the Oracle");
 		MusicRecording mr = new MusicRecording();
 		mr.setTitle("Java Greatest Hits");
-		mr.setArtist("On Java");
+		mr.setArtist("Walkalong Javvity");
 		mr.setTracks(Arrays.asList((new Track[]{t1,t2})));
 		
 		// Create a MR that SHOULD NOT be found
 		Track t21 = new Track("Jivin' on a SUNny day");
 		Track t22 = new Track("Consulting the Oracle");
 		MusicRecording mr2 = new MusicRecording();
-		mr.setTitle("My Greatest Hits");
-		mr.setArtist("Me, Myself and I HavaJava"); // substring, should not match
-		mr.setTracks(Arrays.asList((new Track[]{t21,t22})));
+		mr2.setTitle("My Greatest Nits");
+		mr2.setArtist("Me, Myself and HavaKava"); // substring, should not match
+		mr2.setTracks(Arrays.asList((new Track[]{t21,t22})));
 
 		em.getTransaction().begin();
 
 		// Create one entity that we can search on
+		em.persist(mr0);
 		em.persist(mr);
 		em.persist(mr2);
 		em.getTransaction().commit();
-
+		
 		// Now do the search.
-		// TODO: Use better Analyizer, change this to just "Java"
-		final String queryString = "Java Greatest Hits";
+		// TODO: Use better Analyzer, change this to just "Java"
+		final String queryString = "Java";
 		
 		// Create query using Hibernate Search DSL.
 		QueryBuilder qb = fullTextEntityManager.getSearchFactory()
@@ -79,21 +85,22 @@ public class SearchTest {
 			.matching(queryString)
 			.createQuery();
 
-		// wrap Lucene query in JPA Query
+		// wrap Lucene Query in JPA Query
 		Query jpaQuery = 
 			fullTextEntityManager.createFullTextQuery(luceneQuery, MusicRecording.class);
 
 		System.out.println("Executing search");
 		em.getTransaction().begin();
-		List<?> results = jpaQuery.getResultList();
-
+		List<MusicRecording> results = jpaQuery.getResultList();
 		em.getTransaction().commit();
 		em.close();
 		
 		System.out.println("Results:");
-		for (Object x : results) {
-			System.out.println(x);
+		for (MusicRecording mrec : results) {
+			System.out.println(mrec);
 		}
 		assertEquals("Didn't find searched-for object", 1, results.size());
+		MusicRecording found = results.get(0);
+		System.out.println(found.getId() + "--" + found.getTitle());
 	}
 }
