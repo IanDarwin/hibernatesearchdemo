@@ -9,14 +9,23 @@ Based on my previous work in the AndroidCookbook.com web site back in 2010 and u
 with information from http://hibernate.org/search/documentation/getting-started/.
 See the Hibernate.org/search documentation for more information.
 
-The "main program" is structured as a JUnit test.
+The "main program" is structured as a JUnit test so we can remain certain that it's working.
+Feel free to use as a template for your application.
 
 == Running
 
 mvn test
 
-or open as Eclipse project and run the JUnit tests.
+or 
+
+Open as and Eclipse project, and run the JUnit tests.
 
 == Windows?
 
-Change the directory from "/tmp" to (say) "C:/temp" in persistence.xml
+Change the directory from `/tmp` to (say) `C:/temp` in __persistence.xml__.
+
+== Updates?
+
+As always, `git pull` to get the latest version. If there's still a bug,
+either send me a `diff -u` listing or, better yet, *github fork* and
+send a pull request. Thanks!
