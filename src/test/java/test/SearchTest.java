@@ -64,7 +64,7 @@ public class SearchTest {
 		em.getTransaction().commit();
 
 		// Now do the search.
-		// TODO: Use a tokenizer, change this to just "Java"
+		// TODO: Use better Analyizer, change this to just "Java"
 		final String queryString = "Java Greatest Hits";
 		
 		// Create query using Hibernate Search DSL.
