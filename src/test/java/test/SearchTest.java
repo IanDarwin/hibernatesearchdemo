@@ -28,8 +28,7 @@ public class SearchTest {
 	public static void init() throws InterruptedException {
 		emf = Persistence.createEntityManagerFactory("hibernatesearchdemo");
 		em = emf.createEntityManager();
-		FullTextEntityManager fullTextEntityManager = 
-				Search.getFullTextEntityManager(em);
+		fullTextEntityManager = Search.getFullTextEntityManager(em);
 		fullTextEntityManager.createIndexer(MusicRecording.class).startAndWait();
 		System.out.println("Indexing done");
 	}
@@ -76,7 +75,8 @@ public class SearchTest {
 			.createQuery();
 
 		// wrap Lucene query in JPA Query
-		Query jpaQuery = fullTextEntityManager.createFullTextQuery(luceneQuery, MusicRecording.class);
+		Query jpaQuery = 
+			fullTextEntityManager.createFullTextQuery(luceneQuery, MusicRecording.class);
 
 		System.out.println("Executing search");
 		List<?> results = jpaQuery.getResultList();

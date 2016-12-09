@@ -1,7 +1,6 @@
 package model;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -39,7 +38,7 @@ public class MusicRecording {
 	@IndexedEmbedded
 	@OneToMany(cascade=CascadeType.ALL)
 	@OrderColumn(name="index_number")
-	private Track tracks[] = new Track[0];
+	private List<Track> tracks = new ArrayList<>();
 	
 	public MusicRecording() {
 		// empty
@@ -92,15 +91,14 @@ public class MusicRecording {
 	}
 
 	public List<Track> getTracks() {
-		if (tracks == null || tracks.length == 0) {
+		if (tracks == null || tracks.size() == 0) {
 			return new ArrayList<Track>();
 		}
-		return Arrays.asList(tracks);
+		return tracks;
 	}
 
 	public void setTracks(List<Track> tracks) {
-		Track[] target = new Track[tracks.size()];
-		this.tracks = (Track[]) tracks.toArray(target);
+		this.tracks = tracks;
 	}
 
 	@Override
@@ -108,7 +106,7 @@ public class MusicRecording {
         StringBuffer buffer = new StringBuffer();
         buffer.append(title).append(" - ");
         buffer.append(artist).append(" (");
-        buffer.append(tracks.length).append(" tracks)");
+        buffer.append(tracks.size()).append(" tracks)");
         return buffer.toString();
     }
 }
