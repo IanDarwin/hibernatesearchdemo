@@ -3,3 +3,15 @@
 This is an example of using Hibernate Search, formerly known as Lucene.
 
 See http://hibernate.org/search/documentation/getting-started/ for some pointers.
+
+The "main program" is structured as a JUnit test.
+
+== Running
+
+mvn test
+
+or open as Eclipse project and run the JUnit tests.
+
+== Windows?
+
+Change the directory from "/tmp" to (say) "C:/temp" in persistence.xml
