@@ -53,7 +53,7 @@ public class SearchTest {
 		Track t22 = new Track("Consulting the Oracle");
 		MusicRecording mr2 = new MusicRecording();
 		mr.setTitle("My Greatest Hits");
-		mr.setArtist("Me, Myself and I");
+		mr.setArtist("Me, Myself and I HavaJava"); // substring, should not match
 		mr.setTracks(Arrays.asList((new Track[]{t21,t22})));
 
 		em.getTransaction().begin();
