@@ -44,7 +44,7 @@ public class SearchTest {
 		Track t1 = new Track("Jivin' on a SUNny day");
 		Track t2 = new Track("Consulting the Oracle");
 		MusicRecording mr = new MusicRecording();
-		mr.setTitle(queryString);
+		mr.setTitle("Java Greatest Hits");
 		mr.setArtist("On Java");
 		mr.setTracks(Arrays.asList((new Track[]{t1,t2})));
 		
