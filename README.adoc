@@ -2,7 +2,12 @@
 
 This is an example of using Hibernate Search, formerly known as Lucene.
 
-See http://hibernate.org/search/documentation/getting-started/ for some pointers.
+Data entities are written to the database using the JPA API, but Hibernate is the
+JPA Provider, so Hibernate Search is fine with that.
+
+Based on my previous work in the AndroidCookbook.com web site back in 2010 and updated
+with information from http://hibernate.org/search/documentation/getting-started/.
+See the Hibernate.org/search documentation for more information.
 
 The "main program" is structured as a JUnit test.
 
