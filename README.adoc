@@ -14,7 +14,7 @@ Feel free to use as a template for your application.
 
 == Running
 
-mvn test
+`mvn test`
 
 or 
 
