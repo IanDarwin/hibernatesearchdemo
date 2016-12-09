@@ -61,7 +61,7 @@ public class SearchTest {
 		// Create one entity that we can search on
 		em.persist(mr);
 		em.persist(mr2);
-		em.flush();
+		em.getTransaction().commit();
 
 		// Now do the search.
 		// Create query using Hibernate Search DSL.
@@ -79,6 +79,7 @@ public class SearchTest {
 			fullTextEntityManager.createFullTextQuery(luceneQuery, MusicRecording.class);
 
 		System.out.println("Executing search");
+		em.getTransaction().begin();
 		List<?> results = jpaQuery.getResultList();
 
 		em.getTransaction().commit();
@@ -88,7 +89,6 @@ public class SearchTest {
 		for (Object x : results) {
 			System.out.println(x);
 		}
-		assertEquals("Found searched-for object", 1, results.size());
+		assertEquals("Didn't find searched-for object", 1, results.size());
 	}
-
 }
