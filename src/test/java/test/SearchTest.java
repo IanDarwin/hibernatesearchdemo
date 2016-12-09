@@ -44,7 +44,7 @@ public class SearchTest {
 		Track t1 = new Track("Jivin' on a SUNny day");
 		Track t2 = new Track("Consulting the Oracle");
 		MusicRecording mr = new MusicRecording();
-		mr.setTitle("Java Greatest Hits");
+		mr.setTitle(queryString);
 		mr.setArtist("On Java");
 		mr.setTracks(Arrays.asList((new Track[]{t1,t2})));
 		
@@ -64,6 +64,9 @@ public class SearchTest {
 		em.getTransaction().commit();
 
 		// Now do the search.
+		// TODO: Use a tokenizer, change this to just "Java"
+		final String queryString = "Java Greatest Hits";
+		
 		// Create query using Hibernate Search DSL.
 		QueryBuilder qb = fullTextEntityManager.getSearchFactory()
 			.buildQueryBuilder().forEntity(MusicRecording.class).get();
@@ -71,7 +74,7 @@ public class SearchTest {
 		org.apache.lucene.search.Query luceneQuery = qb
 			.keyword()
 			.onFields("title", "artist")
-			.matching("Java")
+			.matching(queryString)
 			.createQuery();
 
 		// wrap Lucene query in JPA Query
